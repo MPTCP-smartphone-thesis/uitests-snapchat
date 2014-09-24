@@ -1,6 +1,7 @@
 package snapchat;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import login.Login;
@@ -18,9 +19,7 @@ public class LaunchSettings extends UiAutomatorTestCase {
 	private static String ID_LOGIN_LOGIN = "com.snapchat.android:id/log_in_button";
 
 	private static String ID_SNAP_BUTTON = "com.snapchat.android:id/camera_take_snap_button";
-	// private static String ID_SNAP_PICTURE = "com.snapchat.android:id/pager";
-	// private static String ID_SNAP_MESSAGE =
-	// "com.snapchat.android:id/picture_caption";
+	private static String ID_SNAP_MESSAGE = "com.snapchat.android:id/picture_caption";
 	private static String ID_SNAP_SEND = "com.snapchat.android:id/picture_send_pic";
 
 	private static String ID_LIST_RECIPIENT = "com.snapchat.android:id/send_to_list";
@@ -55,22 +54,20 @@ public class LaunchSettings extends UiAutomatorTestCase {
 	protected void snapAPicture(String message, String[] recipients) {
 
 		/* Click on the picture button and set the message */
-		sleep(1000);
+		sleep(1500);
 		if (!Utils.click(ID_SNAP_BUTTON)) {
 			// in another menu, go back to main screen
 			getUiDevice().pressBack();
 			assertTrue("Snap button not available", Utils.click(ID_SNAP_BUTTON));
 		}
 		sleep(1000);
-		/*
-		 * not used for now, typing does not work as expected.
-		 * assertTrue("Unable to display message",
-		 * Utils.click(ID_SNAP_PICTURE)); sleep(1000);
-		 * 
-		 * assertTrue("Unable to set picture message",
-		 * Utils.setText(ID_SNAP_MESSAGE, message)); getUiDevice().pressBack();
-		 * sleep(1000);
-		 */
+
+		assertTrue("Not able to click on the screen",
+				Utils.clickOnTheMiddle(this));
+		assertTrue("Not able to set message",
+				Utils.setText(ID_SNAP_MESSAGE, new Date().toString()));
+		getUiDevice().pressBack(); // remove keyboard
+		sleep(500);
 
 		assertTrue("Send button not available",
 				Utils.clickAndWaitForNewWindow(ID_SNAP_SEND));
