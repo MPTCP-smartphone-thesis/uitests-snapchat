@@ -11,11 +11,11 @@ import com.android.uiautomator.core.UiObjectNotFoundException;
 import com.android.uiautomator.testrunner.UiAutomatorTestCase;
 
 public class LaunchSettings extends UiAutomatorTestCase {
-	private static String ID_LOGIN_BUTTON = "com.snapchat.android:id/landing_page_login_button";
+	private static String ID_LOGIN_BUTTON = "com.snapchat.android:id/login_and_signup_page_fragment_login_button";
 
-	private static String ID_LOGIN_EMAIL = "com.snapchat.android:id/login_username_email";
-	private static String ID_LOGIN_PASSWD = "com.snapchat.android:id/login_password";
-	private static String ID_LOGIN_LOGIN = "com.snapchat.android:id/login_button";
+	private static String ID_LOGIN_EMAIL = "com.snapchat.android:id/login_username_email_field";
+	private static String ID_LOGIN_PASSWD = "com.snapchat.android:id/login_password_field";
+	private static String ID_LOGIN_LOGIN = "com.snapchat.android:id/log_in_button";
 
 	private static String ID_SNAP_BUTTON = "com.snapchat.android:id/camera_take_snap_button";
 	// private static String ID_SNAP_PICTURE = "com.snapchat.android:id/pager";
@@ -42,6 +42,7 @@ public class LaunchSettings extends UiAutomatorTestCase {
 					Utils.setText(ID_LOGIN_EMAIL, username));
 			assertTrue("Password field not available",
 					Utils.setText(ID_LOGIN_PASSWD, password));
+			sleep(1000);
 			assertTrue("Login button not available",
 					Utils.clickAndWaitForNewWindow(ID_LOGIN_LOGIN));
 		}
