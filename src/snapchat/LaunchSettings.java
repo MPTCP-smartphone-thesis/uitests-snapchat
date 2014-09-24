@@ -3,7 +3,7 @@ package snapchat;
 import java.util.ArrayList;
 import java.util.List;
 
-import login.LoginClass;
+import login.Login;
 import utils.Utils;
 
 import com.android.uiautomator.core.UiObject;
@@ -99,7 +99,7 @@ public class LaunchSettings extends UiAutomatorTestCase {
 	public void testDemo() throws UiObjectNotFoundException {
 		assertTrue("OOOOOpps",
 				Utils.openApp(this, "Snapchat", "com.snapchat.android"));
-		performLogin(LoginClass.getUsername(), LoginClass.getPassword());
+		performLogin(Login.getUsername(), Login.getPassword());
 		// let's spam
 		while (true) {
 			snapAPicture();
