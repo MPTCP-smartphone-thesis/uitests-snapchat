@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import login.Login;
+import login.LoginClass;
 import utils.Utils;
 
 import com.android.uiautomator.core.UiObject;
@@ -44,6 +44,7 @@ public class LaunchSettings extends UiAutomatorTestCase {
 			sleep(1000);
 			assertTrue("Login button not available",
 					Utils.clickAndWaitForNewWindow(ID_LOGIN_LOGIN));
+			sleep(5000);
 		}
 	}
 
@@ -103,7 +104,7 @@ public class LaunchSettings extends UiAutomatorTestCase {
 	public void testDemo() throws UiObjectNotFoundException {
 		assertTrue("OOOOOpps",
 				Utils.openApp(this, "Snapchat", "com.snapchat.android"));
-		performLogin(Login.getUsername(), Login.getPassword());
+		performLogin(LoginClass.getUsername(), LoginClass.getPassword());
 		// let's spam
 		while (true) {
 			snapAPicture();
