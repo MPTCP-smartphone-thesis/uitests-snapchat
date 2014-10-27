@@ -106,10 +106,12 @@ public class LaunchSettings extends UiAutomatorTestCase {
 				Utils.openApp(this, "Snapchat", "com.snapchat.android"));
 		performLogin(LoginClass.getUsername(), LoginClass.getPassword());
 		// let's spam
-		while (true) {
+		Utils.launchTcpdump("snapchat", 900);
+		for (int i = 0; i < 10; i++) {
 			snapAPicture();
 			sleep(5000);
 		}
+		Utils.killTcpdump();
 	}
 
 }
