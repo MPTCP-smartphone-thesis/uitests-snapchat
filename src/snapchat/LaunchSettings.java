@@ -88,14 +88,15 @@ public class LaunchSettings extends UiAutomatorTestCase {
 				}
 			}
 		}
-		sleep(1000);
-		if (Utils.hasObject(ID_LIST_SEND))
-			assertTrue("Send button in recipient list not available",
-					Utils.click(ID_LIST_SEND));
-		else {
+		sleep(2000);
+		while (!Utils.hasObject(ID_LIST_SEND)) {
 			System.err.println("Button not found !?");
-			getUiDevice().pressBack();
+			sleep(1000);
 		}
+		sleep(1000);
+		assertTrue("Send button in recipient list not available",
+					Utils.click(ID_LIST_SEND));
+		// else
 
 		/* Return to camera view */
 		Utils.clickAndWaitForNewWindow(ID_LIST_BACK);
