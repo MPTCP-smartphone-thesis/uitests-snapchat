@@ -6,6 +6,7 @@ import java.util.List;
 
 import login.LoginClass;
 import utils.Utils;
+import android.os.RemoteException;
 
 import com.android.uiautomator.core.UiObject;
 import com.android.uiautomator.core.UiObjectNotFoundException;
@@ -89,13 +90,17 @@ public class LaunchSettings extends UiAutomatorTestCase {
 			}
 		}
 		sleep(2000);
-		while (!Utils.hasObject(ID_LIST_SEND)) {
+		if (!Utils.hasObject(ID_LIST_SEND)) {
 			System.err.println("Button not found !?");
 			sleep(1000);
+			getUiDevice().click(1000, 1700);
+		}
+ else {
+			sleep(1000);
+			assertTrue("Send button in recipient list not available",
+					Utils.click(ID_LIST_SEND));
 		}
 		sleep(1000);
-		assertTrue("Send button in recipient list not available",
-					Utils.click(ID_LIST_SEND));
 		// else
 
 		/* Return to camera view */
@@ -106,6 +111,12 @@ public class LaunchSettings extends UiAutomatorTestCase {
 		assertTrue("OOOOOpps",
 				Utils.openApp(this, "Snapchat", "com.snapchat.android"));
 		performLogin(LoginClass.getUsername(), LoginClass.getPassword());
+		try {
+			getUiDevice().setOrientationNatural();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		// let's spam
 		Utils.launchTcpdump("snapchat", 900);
 		for (int i = 0; i < 10; i++) {
