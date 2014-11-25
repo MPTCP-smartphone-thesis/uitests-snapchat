@@ -118,12 +118,17 @@ public class LaunchSettings extends UiAutomatorTestCase {
 			e.printStackTrace();
 		}
 		// let's spam
-		Utils.launchTcpdump("snapchat");
+		String iface = getParams().getString("iface");
+		if (iface != null) {
+			Utils.launchTcpdump("snapchat", iface);
+		}
 		for (int i = 0; i < 10; i++) {
 			snapAPicture();
 			sleep(5000);
 		}
-		Utils.killTcpdump();
+		if (iface != null) {
+			Utils.killTcpdump();
+		}
 	}
 
 }
