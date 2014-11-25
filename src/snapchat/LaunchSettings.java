@@ -13,21 +13,23 @@ import com.android.uiautomator.core.UiObjectNotFoundException;
 import com.android.uiautomator.testrunner.UiAutomatorTestCase;
 
 public class LaunchSettings extends UiAutomatorTestCase {
-	private static String ID_LOGIN_BUTTON = "com.snapchat.android:id/login_and_signup_page_fragment_login_button";
+	private static final String ID_LOGIN_BUTTON = "com.snapchat.android:id/login_and_signup_page_fragment_login_button";
 
-	private static String ID_LOGIN_EMAIL = "com.snapchat.android:id/login_username_email_field";
-	private static String ID_LOGIN_PASSWD = "com.snapchat.android:id/login_password_field";
-	private static String ID_LOGIN_LOGIN = "com.snapchat.android:id/log_in_button";
+	private static final String ID_LOGIN_EMAIL = "com.snapchat.android:id/login_username_email_field";
+	private static final String ID_LOGIN_PASSWD = "com.snapchat.android:id/login_password_field";
+	private static final String ID_LOGIN_LOGIN = "com.snapchat.android:id/log_in_button";
 
-	private static String ID_SNAP_BUTTON = "com.snapchat.android:id/camera_take_snap_button";
-	private static String ID_SNAP_MESSAGE = "com.snapchat.android:id/picture_caption";
-	private static String ID_SNAP_SEND = "com.snapchat.android:id/picture_send_pic";
+	private static final String ID_SNAP_BUTTON = "com.snapchat.android:id/camera_take_snap_button";
+	private static final String ID_SNAP_MESSAGE = "com.snapchat.android:id/picture_caption";
+	private static final String ID_SNAP_SEND = "com.snapchat.android:id/picture_send_pic";
 
-	private static String ID_LIST_RECIPIENT = "com.snapchat.android:id/send_to_list";
-	private static String ID_LIST_NAME = "com.snapchat.android:id/name";
-	private static String ID_LIST_SEND = "com.snapchat.android:id/send_to_bottom_panel_send_button";
+	private static final String ID_LIST_RECIPIENT = "com.snapchat.android:id/send_to_list";
+	private static final String ID_LIST_NAME = "com.snapchat.android:id/name";
+	private static final String ID_LIST_SEND = "com.snapchat.android:id/send_to_bottom_panel_send_button";
 
-	private static String ID_LIST_BACK = "com.snapchat.android:id/feed_back_button_area";
+	private static final String ID_LIST_BACK = "com.snapchat.android:id/feed_back_button_area";
+
+	private static final int NB_SNAPS = 2;
 
 	protected void performLogin(String username, String password) {
 		/* If the page has the login button then perform login */
@@ -122,7 +124,7 @@ public class LaunchSettings extends UiAutomatorTestCase {
 		if (iface != null) {
 			Utils.launchTcpdump("snapchat", iface);
 		}
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < NB_SNAPS; i++) {
 			snapAPicture();
 			sleep(5000);
 		}
