@@ -29,7 +29,7 @@ public class LaunchSettings extends UiAutomatorTestCase {
 
 	private static final String ID_LIST_BACK = "com.snapchat.android:id/feed_back_button_area";
 
-	private static final int NB_SNAPS = 3;
+	private static final int NB_SNAPS = 2;
 
 	protected void performLogin(String username, String password) {
 		/* If the page has the login button then perform login */
