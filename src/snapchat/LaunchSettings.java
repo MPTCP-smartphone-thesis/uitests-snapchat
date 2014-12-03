@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import login.LoginClass;
+import login.Login;
 import utils.Utils;
 import android.os.RemoteException;
 
@@ -112,7 +112,7 @@ public class LaunchSettings extends UiAutomatorTestCase {
 	public void testDemo() throws UiObjectNotFoundException {
 		assertTrue("OOOOOpps",
 				Utils.openApp(this, "Snapchat", "com.snapchat.android"));
-		performLogin(LoginClass.getUsername(), LoginClass.getPassword());
+		performLogin(Login.getUsername(), Login.getPassword());
 		try {
 			getUiDevice().setOrientationNatural();
 		} catch (RemoteException e) {
