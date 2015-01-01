@@ -111,7 +111,9 @@ public class LaunchSettings extends UiAutomatorTestCase {
 
 	public void testDemo() throws UiObjectNotFoundException {
 		assertTrue("OOOOOpps",
-				Utils.openApp(this, "Snapchat", "com.snapchat.android"));
+				Utils.openApp(this, "Snapchat",
+						"com.snapchat.android",
+						"com.snapchat.android.LandingPageActivity"));
 		performLogin(Login.getUsername(), Login.getPassword());
 		try {
 			getUiDevice().setOrientationNatural();
