@@ -85,6 +85,10 @@ public class LaunchSettings extends UiAutomatorTestCase {
 		for (int j = 0; !success && j < 3; j++) {
 			success = true;
 			success &= Utils.setText(ID_SNAP_MESSAGE, new Date().toString());
+			if (!success) {
+				sleep(500);
+				continue;
+			}
 			getUiDevice().pressBack(); // remove keyboard
 			sleep(1000);
 
