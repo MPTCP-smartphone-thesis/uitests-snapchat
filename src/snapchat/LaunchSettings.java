@@ -41,7 +41,7 @@ public class LaunchSettings extends UiAutomatorTestCase {
 
 			/* Insert username, password and click login button */
 			assertTrue("Email field not available",
-					Utils.setText(ID_LOGIN_EMAIL, username));
+					Utils.setText(ID_LOGIN_EMAIL, username, true));
 			assertTrue("Password field not available",
 					Utils.setText(ID_LOGIN_PASSWD, password));
 			sleep(1000);
@@ -58,7 +58,6 @@ public class LaunchSettings extends UiAutomatorTestCase {
 	protected void snapAPicture(String message, String[] recipients) {
 
 		/* Click on the picture button and set the message */
-		sleep(1500);
 		int i = 0;
 		while (!Utils.click(ID_SNAP_BUTTON)) {
 			// in another menu, go back to main screen
@@ -77,6 +76,7 @@ public class LaunchSettings extends UiAutomatorTestCase {
 				Utils.clickOnTheMiddle(this));
 		sleep(750);
 		if (!Utils.hasObject(ID_SNAP_MESSAGE)) { // try it twice
+			System.out.println("Retry to click on the middle");
 			Utils.clickOnTheMiddle(this);
 			sleep(750);
 		}
@@ -86,6 +86,7 @@ public class LaunchSettings extends UiAutomatorTestCase {
 			success = true;
 			success &= Utils.setText(ID_SNAP_MESSAGE, new Date().toString());
 			if (!success) {
+				System.out.println("Not able to set text");
 				sleep(500);
 				continue;
 			}
@@ -137,13 +138,14 @@ public class LaunchSettings extends UiAutomatorTestCase {
 				Utils.openApp(this, "Snapchat",
 						"com.snapchat.android",
 						"com.snapchat.android.LandingPageActivity"));
-		performLogin(Login.getUsername(), Login.getPassword());
 		try {
 			getUiDevice().setOrientationNatural();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		sleep(1500);
+		performLogin(Login.getUsername(), Login.getPassword());
 		// let's spam
 		for (int i = 0; i < NB_SNAPS; i++) {
 			snapAPicture();
