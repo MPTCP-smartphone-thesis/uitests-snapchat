@@ -34,10 +34,10 @@ public class LaunchSettings extends UiAutomatorTestCase {
 	protected void performLogin(String username, String password) {
 		/* If the page has the login button then perform login */
 		if (Utils.hasObject(ID_LOGIN_BUTTON)) {
-
 			/* Click login button */
 			assertTrue("Unable to click on the login button",
-					Utils.clickAndWaitForNewWindow(ID_LOGIN_BUTTON));
+					Utils.click(ID_LOGIN_BUTTON));
+			sleep(500);
 
 			/* Insert username, password and click login button */
 			assertTrue("Email field not available",
@@ -92,7 +92,8 @@ public class LaunchSettings extends UiAutomatorTestCase {
 			getUiDevice().pressBack(); // remove keyboard
 			sleep(1000);
 
-			success &= Utils.clickAndWaitForNewWindow(ID_SNAP_SEND);
+			success &= Utils.click(ID_SNAP_SEND);
+			sleep(1000);
 		}
 		Utils.customAssertTrue(this, "Not able to send message", success);
 
