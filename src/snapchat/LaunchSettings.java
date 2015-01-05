@@ -59,28 +59,43 @@ public class LaunchSettings extends UiAutomatorTestCase {
 
 		/* Click on the picture button and set the message */
 		sleep(1500);
-		if (!Utils.click(ID_SNAP_BUTTON)) {
+		int i = 0;
+		while (!Utils.click(ID_SNAP_BUTTON)) {
 			// in another menu, go back to main screen
 			getUiDevice().pressBack();
 			sleep(500);
-			assertTrue("Snap button not available", Utils.click(ID_SNAP_BUTTON));
+			if (i > 4) {
+				Utils.customAssertTrue(this, "Snap button not available",
+						Utils.click(ID_SNAP_BUTTON));
+				break;
+			}
+			i++;
 		}
 		sleep(1000);
 
-		assertTrue("Not able to click on the screen",
+		Utils.customAssertTrue(this, "Not able to click on the screen",
 				Utils.clickOnTheMiddle(this));
-		sleep(500);
-		assertTrue("Not able to set message",
-				Utils.setText(ID_SNAP_MESSAGE, new Date().toString()));
-		getUiDevice().pressBack(); // remove keyboard
 		sleep(750);
+		if (!Utils.hasObject(ID_SNAP_MESSAGE)) { // try it twice
+			Utils.clickOnTheMiddle(this);
+			sleep(750);
+		}
 
-		assertTrue("Send button not available",
-				Utils.clickAndWaitForNewWindow(ID_SNAP_SEND));
+		boolean success = false;
+		for (int j = 0; !success && j < 3; j++) {
+			success = true;
+			success &= Utils.setText(ID_SNAP_MESSAGE, new Date().toString());
+			getUiDevice().pressBack(); // remove keyboard
+			sleep(1000);
+
+			success &= Utils.clickAndWaitForNewWindow(ID_SNAP_SEND);
+		}
+		Utils.customAssertTrue(this, "Not able to send message", success);
 
 		List<UiObject> available = Utils.getElems(ID_LIST_RECIPIENT,
 				ID_LIST_NAME);
-		assertTrue("Unable to retrieve the recipients", !available.isEmpty());
+		Utils.customAssertTrue(this, "Unable to retrieve the recipients",
+				!available.isEmpty());
 
 		List<String> checked = new ArrayList<String>();
 		for (UiObject dest : available) {
@@ -88,7 +103,7 @@ public class LaunchSettings extends UiAutomatorTestCase {
 				if (Utils.hasText(dest, recipient)
 						&& !checked.contains(recipient)) {
 					checked.add(recipient);
-					assertTrue("Unable to select recipient",
+					Utils.customAssertTrue(this, "Unable to select recipient",
 							Utils.hasTextAndClick(dest, recipient));
 				}
 			}
@@ -101,7 +116,8 @@ public class LaunchSettings extends UiAutomatorTestCase {
 		}
  else {
 			sleep(1000);
-			assertTrue("Send button in recipient list not available",
+			Utils.customAssertTrue(this,
+					"Send button in recipient list not available",
 					Utils.click(ID_LIST_SEND));
 		}
 		sleep(1000);
