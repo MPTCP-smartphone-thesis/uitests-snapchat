@@ -62,16 +62,18 @@ public class LaunchSettings extends UiAutomatorTestCase {
 		if (!Utils.click(ID_SNAP_BUTTON)) {
 			// in another menu, go back to main screen
 			getUiDevice().pressBack();
+			sleep(500);
 			assertTrue("Snap button not available", Utils.click(ID_SNAP_BUTTON));
 		}
 		sleep(1000);
 
 		assertTrue("Not able to click on the screen",
 				Utils.clickOnTheMiddle(this));
+		sleep(500);
 		assertTrue("Not able to set message",
 				Utils.setText(ID_SNAP_MESSAGE, new Date().toString()));
 		getUiDevice().pressBack(); // remove keyboard
-		sleep(500);
+		sleep(750);
 
 		assertTrue("Send button not available",
 				Utils.clickAndWaitForNewWindow(ID_SNAP_SEND));
