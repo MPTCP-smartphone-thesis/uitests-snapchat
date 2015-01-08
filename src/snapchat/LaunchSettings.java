@@ -6,7 +6,6 @@ import java.util.List;
 
 import login.Login;
 import utils.Utils;
-import android.os.RemoteException;
 
 import com.android.uiautomator.core.UiObject;
 import com.android.uiautomator.core.UiObjectNotFoundException;
@@ -138,12 +137,6 @@ public class LaunchSettings extends UiAutomatorTestCase {
 				Utils.openApp(this, "Snapchat",
 						"com.snapchat.android",
 						"com.snapchat.android.LandingPageActivity"));
-		try {
-			getUiDevice().setOrientationNatural();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		sleep(1500);
 		performLogin(Login.getUsername(), Login.getPassword());
 		// let's spam
