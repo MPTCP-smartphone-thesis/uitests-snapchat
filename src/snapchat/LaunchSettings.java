@@ -28,7 +28,7 @@ public class LaunchSettings extends UiAutomatorTestCase {
 
 	private static final String ID_LIST_BACK = "com.snapchat.android:id/feed_back_button_area";
 
-	private static final int NB_SNAPS = 3;
+	private static int NB_SNAPS = 3;
 
 	protected void performLogin(String username, String password) {
 		/* If the page has the login button then perform login */
@@ -137,6 +137,7 @@ public class LaunchSettings extends UiAutomatorTestCase {
 				Utils.openApp(this, "Snapchat",
 						"com.snapchat.android",
 						"com.snapchat.android.LandingPageActivity"));
+		NB_SNAPS = Math.max(1, (int) (NB_SNAPS * Utils.getMultTime(this)));
 		sleep(1500);
 		performLogin(Login.getUsername(), Login.getPassword());
 		// let's spam
